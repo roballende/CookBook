@@ -1,8 +1,11 @@
 import { useState } from "react";
 import FormSignIn from "../components/FormSignIn";
 import FormSignUp from "../components/FormSignUp";
+import { useAuthContext } from "../contexts/AuthContext";
 
-function Login({ onLogin }) {
+function Login() {
+  const { setUser } = useAuthContext()
+
   const [showLogin, setShowLogin] = useState(true);
 
   return (
@@ -10,7 +13,7 @@ function Login({ onLogin }) {
       {showLogin ? (
         <>
           <h3>Welcome Back!</h3>
-          <FormSignIn onLogin={onLogin} />
+          <FormSignIn onLogin={setUser} />
           <hr className="solid"/>
           <p>
             Not A User? Become One. &nbsp;
@@ -22,7 +25,7 @@ function Login({ onLogin }) {
       ) : (
         <>
           <h3>Join Us!</h3>
-          <FormSignUp onLogin={onLogin} />
+          <FormSignUp onLogin={setUser} />
           <hr class='solid'/>
           <p>
             Previous User? Sign In. &nbsp;

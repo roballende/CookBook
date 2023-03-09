@@ -1,8 +1,10 @@
 import React from "react";
 import FormNewRecipe from "../components/FormNewRecipe";
+import { useAuthContext } from "../contexts/AuthContext";
 
 
-function NewRecipe({ user }) {
+function NewRecipe() {
+    const { user } = useAuthContext()
 
     return (
     <div>

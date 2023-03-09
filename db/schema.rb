@@ -10,25 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_26_231652) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_07_231224) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "cookbooks", force: :cascade do |t|
-    t.string "title"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_cookbooks_on_user_id"
-  end
-
-  create_table "profiles", force: :cascade do |t|
-    t.text "about"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_profiles_on_user_id"
-  end
 
   create_table "recipes", force: :cascade do |t|
     t.string "title"
@@ -80,17 +64,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_26_231652) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "reviews", force: :cascade do |t|
-    t.integer "rating"
-    t.text "description"
-    t.bigint "user_id", null: false
-    t.bigint "recipe_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["recipe_id"], name: "index_reviews_on_recipe_id"
-    t.index ["user_id"], name: "index_reviews_on_user_id"
-  end
-
   create_table "user_recipes", force: :cascade do |t|
     t.boolean "cooked", default: false, null: false
     t.boolean "favorite", default: false, null: false
@@ -98,6 +71,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_26_231652) do
     t.bigint "recipe_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "rating", default: 0, null: false
+    t.text "comment"
     t.index ["recipe_id"], name: "index_user_recipes_on_recipe_id"
     t.index ["user_id"], name: "index_user_recipes_on_user_id"
   end
@@ -110,10 +85,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_26_231652) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "cookbooks", "users"
-  add_foreign_key "profiles", "users"
-  add_foreign_key "reviews", "recipes"
-  add_foreign_key "reviews", "users"
   add_foreign_key "user_recipes", "recipes"
   add_foreign_key "user_recipes", "users"
 end

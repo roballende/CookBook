@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
 
     def index
-        render json: Recipe.all, status: :ok
+        render json: Recipe.where.not(id: @current_user.recipe_ids), status: :ok
     end
 
     def create

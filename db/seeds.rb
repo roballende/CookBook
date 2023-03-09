@@ -3,10 +3,7 @@ require 'faker'
 
 Recipe.destroy_all 
 User.destroy_all
-Profile.destroy_all
 UserRecipe.destroy_all
-Review.destroy_all
-Cookbook.destroy_all
 
 puts "🌱 Seeding data..."
 
@@ -82,12 +79,6 @@ ActiveRecord::Base.transaction do
     User1 = User.create(username: "tester1", password: "password1")
     User2 = User.create(username: "tester2", password: "password2")
     User3 = User.create(username: "tester3", password: "password3")
-
-    puts "creating reviews"
-    30.times do
-        Review.create(description: Faker::Lorem.sentence, rating: rand(1..5), user_id: User.all.sample.id, recipe_id: Recipe.all.sample.id)
-    end
-
 end
 
 puts "✅ Done seeding!"

@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.recipe-row-image {
+  max-height: 3em;
+  max-width: 3em;
+}

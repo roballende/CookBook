@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import {  useAuthContext } from "../contexts/AuthContext";
 
-function NavigBar({ user, setUser }) {
+function NavigBar() {
+    const { setUser } = useAuthContext()
+
   function handleLogoutClick() {
     fetch("/signout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
@@ -14,10 +17,9 @@ function NavigBar({ user, setUser }) {
     <nav>
         <div>
             <Link to= "/home">Home</Link> &nbsp;
-            <Link to="/userRecipes">All Recipes</Link> &nbsp;
-            <Link to="/userRecipes">Your Recipes</Link> &nbsp;
-            <Link to="/newRecipe">Create Recipe</Link> &nbsp;
-            <Link to="/cookbook">Cookbook</Link> &nbsp;
+            <Link to="/recipes">Find New Recipes</Link> &nbsp;
+            <Link to="/user_recipes">Cookbook</Link> &nbsp;
+            <Link to="/recipes/new">Create Recipe</Link> &nbsp;
             <Link to="/users">Other Users</Link> &nbsp;
             <Link onClick={handleLogoutClick}>Logout</Link> &nbsp;
         </div>

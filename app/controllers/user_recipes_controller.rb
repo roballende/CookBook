@@ -1,24 +1,39 @@
 class UserRecipesController < ApplicationController
 
+    # data preloading ... includes, eager_load, preload
     def index
-        render json: UserRecipe.all, status: :ok
+        user_id = params[:user_id] || @current_user.id
+        render json: UserRecipe.includes(:user, :recipe).where(user_id: user_id), status: :ok
     end
 
     def show
-        recipe = UserRecipe.find(params[:id])
-        render json: recipe, status: :ok
+        user_recipe = UserRecipe.find(params[:id])
+        render json: user_recipe, status: :ok
     end
 
-    def create
-        recipe = @current_user.recipes.create!(recipe_params)
+     def create
+        recipe = @current_user.user_recipes.create!(user_recipe_params)
         render json: recipe, status: :created
     end
 
+    def update
+        user_recipe = UserRecipe.find(params[:id])
+        user_recipe.update!(user_recipe_params)
+        render json: user_recipe, status: :ok
+    end
+
+    def delete_recipe
+        user_recipe.destroy!
+        render json: user_recipe.recipe, status: :ok
+    end
+    
     private
-    def recipe_params
-        params.permit(:title, :image, :category, :origin, :directions, :ing1, :ing2, :ing3, :ing4, :ing5, :ing6, :ing7, :ing8, 
-        :ing9, :ing10, :ing11, :ing12, :ing13, :ing14, :ing15, :ing16, :ing17, :ing18, :ing19, :ing20, :meas1, :meas2, :meas3, 
-        :meas4, :meas5, :meas6, :meas7, :meas8, :meas9, :meas10, :meas11, :meas12, :meas13, :meas14, :meas15, :meas16, :meas17, 
-        :meas18, :meas19, :meas20)
+
+    def user_recipe_params
+        params.permit(:recipe_id, :cooked, :favorite)
+    end
+
+    def user_recipe
+        @user_recipe ||= UserRecipe.find_by(user: @current_user, recipe_id: params[:recipe_id])
     end
 end
