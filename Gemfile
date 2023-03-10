@@ -47,9 +47,13 @@ group :development do
   gem 'spring'
 end
 
+gem 'pubnub', '~> 5.2', '>= 5.2.1'
 
 gem "active_model_serializers", "~> 0.10.13"
 
 gem "rest-client"
 
-gem "faker"
+
+
+
+

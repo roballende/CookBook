@@ -1,9 +1,9 @@
 require 'rest-client'
 require 'faker'
 
-Recipe.destroy_all 
-User.destroy_all
 UserRecipe.destroy_all
+User.destroy_all
+Recipe.destroy_all 
 
 puts "🌱 Seeding data..."
 

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import NavigBar from '../components/NavigBar';
 import RecipeRow from '../components/RecipeRow';
 
 function AllRecipes() {
     const [recipes, setRecipes] = useState([])
     const [errors, setErrors] = useState([])
+
+    const [query, setQuery] = useState('')
 
     useEffect(() => {
         fetch('/recipes')
@@ -30,18 +33,28 @@ function AllRecipes() {
 
     let submissionErrors = errors.map((error) => (<span key={error}>{error}</span>))
 
-
+    const onQuery = (e) => {
+        const val = e.target.value;
+        setQuery(val);
+        fetch(`/recipes/search?query=${val}`)
+        .then((resp) => resp.json())
+        .then((recipes) => setRecipes(recipes))
+    }
 
     return (
-        
-        <div>
+        <>
+        <NavigBar />
+        <div className="p-6">
             {submissionErrors}
-            <table>
+
+            {/* Search field */}
+            <input onChange={onQuery} value={query} className='w-full border-2 mb-6 p-2' type="text" placeholder="Start typing..." />
+            <table className="table-recipes w-full">
                 <thead>
                     <tr>
                         <th>Recipe Name</th>
-                        <th>Recipe Image</th>
-                        <th>Cookbook</th>
+                        <th className='image'></th>
+                        <th className='cookbook'></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,7 +66,7 @@ function AllRecipes() {
                 </tbody>
             </table>
         </div>
-
+        </>
     )
 
 }

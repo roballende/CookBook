@@ -30,21 +30,29 @@ function FormSignIn({ onLogin }) {
 
   return (
     <form onSubmit={handleSubmit}>
+      <div className="row">
         <label htmlFor="username">Username</label> &nbsp;
         <input
           type="text"
           id="username"
           value={username}
+          className='border-2 p-2 w-full'
           onChange={(e) => setUsername(e.target.value)}
         /> &nbsp;
+      </div>
+
+      <div className="row">
         <label htmlFor="password">Password</label> &nbsp;
         <input
           type="password"
           id="password"
           value={password}
+          className='border-2 p-2 w-full'
           onChange={(e) => setPassword(e.target.value)}
         /> &nbsp;
-        <button type="submit">Sign In</button> &nbsp;
+      </div>
+
+        <button type="submit" className="p-2 border-2 border-black w-full">Sign In</button> &nbsp;
         {errors.map((err) => (
           <span key={err}>{err} &nbsp;</span> 
         ))}

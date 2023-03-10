@@ -3,7 +3,7 @@ class UserRecipesController < ApplicationController
     # data preloading ... includes, eager_load, preload
     def index
         user_id = params[:user_id] || @current_user.id
-        render json: UserRecipe.includes(:user, :recipe).where(user_id: user_id), status: :ok
+        render json: UserRecipe.includes(:user, :recipe).where(user_id: user_id).order(favorite: :desc), status: :ok
     end
 
     def show
@@ -22,9 +22,9 @@ class UserRecipesController < ApplicationController
         render json: user_recipe, status: :ok
     end
 
-    def delete_recipe
-        user_recipe.destroy!
-        render json: user_recipe.recipe, status: :ok
+    def destroy
+        user_recipe = UserRecipe.find(params[:id]).destroy!
+        render json: {}
     end
     
     private

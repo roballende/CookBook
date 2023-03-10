@@ -14,6 +14,19 @@ class UsersController < ApplicationController
     def show
         render json: @current_user, status: :created
     end
+
+    def update
+        @current_user.update!(user_update_params) # user_params.slice(:username)
+        render json: @current_user
+    end
+
+    def destroy
+        # UserRecipe.where(user_id: @current_user.id) -- not needed since we have dependent destroy
+        @current_user.destroy!
+        session.delete :user_id
+        render json: {}
+    end
+
 =begin
     id, username, (user_recipe)id, user_id, recipe_id, cooked
     7   name1      1   7                   true
@@ -34,7 +47,7 @@ class UsersController < ApplicationController
                                     ) as cooked_dishes_count")
                         .joins("LEFT JOIN user_recipes on users.id = user_recipes.user_id")
                         .where.not(id: @current_user.id)
-                        .group("user_recipes.user_id")
+                        .group("users.id")
                         .order(cooked_dishes_count: :desc)
     end
 
@@ -42,5 +55,9 @@ class UsersController < ApplicationController
 
     def user_params
         params.permit(:username, :email, :password)
+    end
+
+    def user_update_params
+        params.permit(:username)
     end
 end

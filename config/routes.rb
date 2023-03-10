@@ -4,14 +4,14 @@ Rails.application.routes.draw do
   post '/signin', to: 'sessions#create'
   delete '/signout', to: 'sessions#destroy'
 
+  resources :user_recipes
 
-
-  resources :user_recipes, except: [:destroy] do
-    delete :delete_recipe, on: :collection
+  # get '/recipes/search', to: "recipes#search"
+  resources :recipes, only: [:index, :create, :show] do 
+    get :search, on: :collection
   end
-  resources :recipes
 
-  # get '/users/:id/other_users', to: 'users#other_users'
+  # get '/users/:id/other_users?q=1', to: 'users#other_users'
   resources :users do
     get :other_users, on: :member
   end

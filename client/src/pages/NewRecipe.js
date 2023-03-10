@@ -1,20 +1,16 @@
 import React from "react";
 import FormNewRecipe from "../components/FormNewRecipe";
-import { useAuthContext } from "../contexts/AuthContext";
-
+import NavigBar from "../components/NavigBar";
 
 function NewRecipe() {
-    const { user } = useAuthContext()
-
     return (
-    <div>
-        {
-            <>
-                <h3>Your New Recipe</h3>
-                <FormNewRecipe />
-            </>
-        }
-    </div>
+        <>
+        <NavigBar />
+        <div className="p-6">
+            <h3 className='text-3xl text-center pb-6'>Your New Recipe</h3>
+            <FormNewRecipe />        
+        </div>
+     </>
     )
 }
 

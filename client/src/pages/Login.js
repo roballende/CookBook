@@ -11,29 +11,29 @@ function Login() {
   return (
     <>
       {showLogin ? (
-        <>
-          <h3>Welcome Back!</h3>
+        <div className="p-6 w-80 m-auto">
+          <h3 className="text-3xl text-center py-8">Welcome Back!</h3>
           <FormSignIn onLogin={setUser} />
           <hr className="solid"/>
           <p>
             Not A User? Become One. &nbsp;
-            <button onClick={() => setShowLogin(false)}>
+            <button className="underline" onClick={() => setShowLogin(false)}>
               Sign Up
             </button>
           </p>
-        </>
+        </div>
       ) : (
-        <>
-          <h3>Join Us!</h3>
+        <div className="p-6 w-80 m-auto">
+          <h3 className="text-3xl text-center py-8">Join Us!</h3>
           <FormSignUp onLogin={setUser} />
-          <hr class='solid'/>
+          <hr className='solid'/>
           <p>
-            Previous User? Sign In. &nbsp;
-            <button onClick={() => setShowLogin(true)}>
+            Previous User? &nbsp;
+            <button className='underline' onClick={() => setShowLogin(true)}>
               Sign In
             </button>
           </p>
-        </>
+        </div>
       )}
     </>
   );

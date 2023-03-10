@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -13,6 +17,122 @@ code {
 }
 
 .recipe-row-image {
-  max-height: 3em;
-  max-width: 3em;
+  max-height: 5em;
+  max-width: 5em;
 }
+
+/* Navigation */
+
+.navbar {
+  background: #000;
+  color: #fff;
+}
+
+ .navbar a {
+  margin-right: 1rem;
+ }
+
+ .navbar .home {
+  flex-grow: 1;
+ }
+
+ /* Recipes table */
+
+ .table-recipes .icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  display: inline;
+ }
+
+ .table-recipes .icon.delete {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  top: -20px;
+  left: -20px;
+ }
+
+ .table-recipes .cell-icon span {
+  opacity: 0;
+ }
+
+ .table-recipes .cell-icon:hover span {
+  opacity: 1;
+ }
+
+ .table-recipes .btn-add {
+  position: relative;
+  top: -25px;
+  left: -5px;
+ }
+
+ .table-recipes .btn-remove {
+  position: relative;
+  top: -15px;
+  left: 5px;
+ }
+
+ .table-recipes thead {
+  position: sticky;
+  top: 0;
+ }
+
+ .table-recipes thead th {
+  background: #000;
+  color: #fff;
+  text-align: left;
+  padding: 5px 10px;
+ }
+
+ .table-recipes thead th.text-center {
+  text-align: center;
+ }
+
+ .table-recipes thead th.image {
+  width: 50px;
+ }
+
+ .table-recipes thead th.cookbook {
+  width: 200px;
+ }
+
+ .table-recipes tbody tr:first-child td {
+  padding-top: 20px;
+ }
+
+ .table-recipes tbody tr:nth-child(2n) td {
+  background: #eaeaea;
+ }
+
+ .table-recipes tbody td {
+  padding: 5px;
+ }
+
+ /* Recipe Form */
+
+
+
+ .form-recipe label {
+  flex-shrink: 0;
+  width: 200px;
+ }
+
+ .form-recipe .row {
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+ }
+ .form-recipe.form-top .row {
+  align-items: flex-start;
+  }
+ 
+ /* Users List */
+
+ .list-user {
+  margin-bottom: 20px;
+ }
+
+ .list-user .row {
+  padding: 5px;
+ }

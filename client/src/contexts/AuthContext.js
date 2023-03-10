@@ -15,16 +15,18 @@ const AuthProvider = ({ children }) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-      fetch('/me').then((resp) => {
+      fetch('/me')
+      .then((resp) => {
         if (resp.ok) {
           resp.json().then((sessionUser) => {
             setUser(sessionUser);            
             setLoading(false);
           })
         } else {
-            navigate('/')
+            setLoading(false)
+            navigate('/') 
         }        
-      });
+      })      
     }, []);
 
     if (loading) return 'Loading...'

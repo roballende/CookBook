@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import NavigBar from '../components/NavigBar';
 import UserRecipeCard from '../components/UserRecipeCard'
 
 function UserRecipes() {
@@ -31,30 +32,54 @@ function UserRecipes() {
             })
     } 
 
+    const onDelete = (userRecipeId) => {
+        fetch(`/user_recipes/${userRecipeId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+            .then((resp) => resp.json())
+            .then(() => {
+               
+                console.log('userRe', userRecipes, userRecipeId)
+                const newUserRecipes = userRecipes.filter((userRecipe) => {
+                
+                    return userRecipe.id !== userRecipeId
+               })
+               setUserRecipes(newUserRecipes)
+            })
+    } 
+
+
     console.log(userRecipes)
 
     return (
-        <table>
-        <thead>
-            <tr>
-                <th>Recipe Name</th>
-                <th>Recipe Image</th>
-                <th>Cooked</th>
-                <th>Favorite</th>
-            </tr>
-        </thead>
-        <tbody>
-        {userRecipes.map(userRecipe => {
-                return (
-                    <Fragment key={userRecipe.id}>
-                        <UserRecipeCard id={userRecipe.id} userRecipe={userRecipe} updateUserRecipe={updateUserRecipe} /> 
-                    </Fragment> 
-                )}
-            )}
-        </tbody>
-    </table>
-
-
+        <>
+            <NavigBar />
+        <div className="p-6">
+            <table className="table-recipes w-full">
+                <thead>
+                    <tr>
+                        <th>Recipe Name</th>
+                        <th className='image'></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {userRecipes.map(userRecipe => {
+                        return (
+                            <Fragment key={userRecipe.id}>
+                                <UserRecipeCard onDelete={onDelete} userRecipe={userRecipe} updateUserRecipe={updateUserRecipe} /> 
+                            </Fragment> 
+                        )}
+                    )}
+                </tbody>
+            </table>
+        </div>
+        </>
     )
 }
 export default UserRecipes

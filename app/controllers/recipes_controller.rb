@@ -4,8 +4,18 @@ class RecipesController < ApplicationController
         render json: Recipe.where.not(id: @current_user.recipe_ids), status: :ok
     end
 
+    def search
+        render json: Recipe.where("title ILIKE ?", "%#{params[:query]}%")
+                            .where.not(id: @current_user.recipe_ids)
+    end
+
+    def show
+        render json: Recipe.find(params[:id])
+    end
+
     def create
         recipe = @current_user.recipes.create!(recipe_params)
+        recipe.publish
         render json: recipe, status: :created
     end
 
