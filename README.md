@@ -1,34 +1,6 @@
 # README
-Recipe App
-This app allows users to view recipes from the database, like them, mark them as cooked, add them to their cookbook, and create new recipes. The app has a React frontend and a Ruby on Rails backend.
+Cookbook App
 
-
-
-You can browse the recipes by clicking on the "Find New Recipes" link in the navbar.
-
-To add a recipe to your cookbook, click on the cookbook icon next to the recipe name.
-
-To like a recipe, click on the heart icon next to the recipe name.
-
-To mark a recipe as cooked, click on the plate icon next to the recipe name.
-
-To create a new recipe, click on the "Create Recipe" link in the navbar.
-
-API Endpoints
-The following API endpoints are available:
-
-GET /api/recipes: Returns a JSON array of all recipes.
-POST /api/recipes: Creates a new recipe.
-GET /api/recipes/:id: Returns a JSON object of a specific recipe.
-PATCH /api/recipes/:id: Updates a specific recipe.
-DELETE /api/recipes/:id: Deletes a specific recipe.
-POST /api/recipes/:id/like: Likes a specific recipe.
-POST /api/recipes/:id/cooked: Marks a specific recipe as cooked.
-POST /api/recipes/:id/cookbook: Adds a specific recipe to the cookbook.
-
-
-
-Recipe App
 This is a recipe app built with React on the frontend and Ruby on Rails on the backend. Users can view recipes from the database, like them, mark them as cooked, add them to their cookbook, and create new recipes. The app also includes user authentication and authorization functionality.
 
 Backend
@@ -65,33 +37,40 @@ react-hot-toast: Displays notifications
 
 
 
-Installation
+Installation:
+
+
 Clone the repository:
-
 shell
-$ git clone https://github.com/username/recipe-app.git
-Install the backend dependencies:
+$ git clone https://github.com/roballende/phase-5-proj-CookBook
 
+
+Install the backend dependencies:
 shell
 $ cd recipe-app
 $ bundle install
-Set up the database:
 
+
+Set up the database:
 ruby
 $ rails db:create
 $ rails db:migrate
 $ rails db:seed
-Start the backend server:
 
+
+Start the backend server:
 ruby
 $ rails s
-Install the frontend dependencies:
 
+
+Install the frontend dependencies:
 shell
 $ cd client
 $ npm install
-Start the frontend server:
 
+
+Start the frontend server:
 ruby
 $ npm start
+
 The app should now be running at http://localhost:4000.
