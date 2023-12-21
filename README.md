@@ -42,7 +42,7 @@ Installation:
 
 Clone the repository:
 shell
-$ git clone https://github.com/roballende/phase-5-proj-CookBook
+$ git clone https://github.com/roballende/CookBook
 
 
 Install the backend dependencies:
